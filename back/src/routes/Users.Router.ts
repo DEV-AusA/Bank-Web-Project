@@ -5,6 +5,7 @@ import auth from "../middlewares/auth";
 // declaro router como tipo interface gracias al modulo npm i -D @types/express
 const usersRouter: Router = Router();
 
+// agrego el middleware auth.ts para que solicite credentials para acceder al controller
 usersRouter.get("/", auth.auth , UsersController.getUsers);
 // capturará cualquier valor ingresado en /users/:id como el id de un user a buscar
 usersRouter.get("/:id", UsersController.getUserById);

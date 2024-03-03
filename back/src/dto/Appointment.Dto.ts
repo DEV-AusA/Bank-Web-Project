@@ -3,5 +3,5 @@ interface AppointmentDto {
     time: number;
     userId: number;
     status: boolean;
-}
-export default AppointmentDto
+};
+export default AppointmentDto;
