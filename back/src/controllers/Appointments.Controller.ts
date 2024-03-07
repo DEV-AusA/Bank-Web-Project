@@ -23,38 +23,22 @@ const addAppointment = async (req: Request, res: Response) => {
     date,
     time,
     userId,
-    status,
+    // status,
   });
   res.status(201).json({
-    message: `Turno Nro ${appointment.id} creado correctamente para el dia ${appointment.date} a las ${appointment.time}`,
+    message: `Turno creado correctamente para el dia ${appointment?.date} a las ${appointment?.time}`,
   });
 };
 // en el req pongo el tipo de dato a recibir y que solamente usara parcialmente algunos datos de la interface IAppointment  <{id: string}, Partial<IAppointment>>
-const cancelAppointment = async (req: Request <{id: string}, Partial<IAppointment>>, res: Response) => {
+const cancelAppointment = async (req: Request, res: Response) => {
   //obtengo  id de la URL
   const { id } = req.params;
   // obtengo los datos del body
-  const { userId, status } = req.body;
-
-  try {      
-    // verifico que ingrese algun valor, y el status no enviado al ser undefined lo filtro como condicion
-    if (!id || !userId || status === undefined) {
-      throw new Error("Falta algun dato");
-    }
-    
-    const appointmentFound = await AppointmentsServices.cancelAppointmentService({ id: Number(id), userId, status});
-
+  const { userId, status } = req.body; 
+    const appointment = await AppointmentsServices.cancelAppointmentService(Number(id), userId, status);
     res.status(200).json({
-      message: `El turno ${appointmentFound?.id} ha sido cancelado correctamente`
-    });  
-    
-  } catch (error) {
-    // muestro el error en la consola
-    console.error(error);
-    res.status(500).json({
-      message: `Algun dato es erróneo o el turno ${id} para ese usuario no existe en los registros`
-    });
-  }
+      message: `El turno con fecha ${appointment.date} para las ${appointment.time} fue sido cancelado correctamente`
+    });     
 
 };
 
@@ -62,5 +46,5 @@ export default {
   getAppointments: catchAsync(getAppointments),
   getAppointmentById: catchAsync(getAppointmentById),
   addAppointment: catchAsync(addAppointment),
-  cancelAppointment,
+  cancelAppointment: catchAsync(cancelAppointment),
 };

@@ -12,13 +12,8 @@ export const AppDataSource = new DataSource({
     database: "ausa_bank",
     dropSchema: true, // <= esta propiedad borra toda la DB si esta activado
     synchronize: true,
-    logging: ["error"], // <= solo muestre errores de la DB
+    logging: false, // ["error"], <= solo muestre errores de la DB
     entities: [User, Credential, Appointment],
     subscribers: [],
     migrations: [],
 })
-
-// Ahorra tipeos XD
-export const AppointmentCheap = AppDataSource.getRepository(Appointment);
-export const CredentialCheap = AppDataSource.getRepository(Credential);
-export const UserCheap = AppDataSource.getRepository(User);

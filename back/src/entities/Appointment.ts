@@ -21,7 +21,9 @@ export class Appointment {
     @Column('integer')
     userId: number
 
-    @Column()
+    @Column({
+        default: true
+    })
     status: boolean
 
     @ManyToOne(() => User, (user) => user.appointments)

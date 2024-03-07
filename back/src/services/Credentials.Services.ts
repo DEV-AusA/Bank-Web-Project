@@ -1,19 +1,18 @@
-import { CredentialCheap } from "../config/data-source";
 import CredentialDto from "../dto/Credential.Dto";
 import { Credential } from "../entities/Credential";
-import ICredential from "../interfaces/ICredential";
+import CredentialRepository from "../repositories/Credential.Repository";
 
 export default {
-    createUserCredentials: async(credentialsData: CredentialDto): Promise<Credential> => {
+    createUserCredentialsService: async(credentialsData: CredentialDto): Promise<Credential> => {
         
-        const newCredential: ICredential = await CredentialCheap.create(credentialsData);
-        await CredentialCheap.save(newCredential);
+        const newCredential: Credential = await CredentialRepository.createCredentials(credentialsData);
+        await CredentialRepository.save(newCredential);
         //retorn el id de las credentials creada        
         return newCredential;
     },
-    verifyCredentials: async(verifyCredentials: CredentialDto) => {     
+    verifyCredentialsService: async(verifyCredentials: CredentialDto) => {     
         // busco el username
-        const userCredentials = await CredentialCheap.findOneBy({
+        const userCredentials = await CredentialRepository.findOneBy({
             username: verifyCredentials.username,
             // password: verifyCredentials.password
         });        
