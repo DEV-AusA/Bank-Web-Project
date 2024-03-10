@@ -1,0 +1,13 @@
+.containerturnos {
+    display: grid;
+    justify-content: center;
+}
+.containerturnos h1{
+    text-align: center;
+}
+.misturnos {
+    width: 1250px;
+}
+.misturnoscard {
+    width: 100%;
+}

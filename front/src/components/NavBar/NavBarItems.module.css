@@ -1,0 +1,27 @@
+.navbarItems {
+    background-color: blue;
+}
+.navbarItems ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.navbarItems ul li {
+    display: inline;
+    float: left;
+}
+.navbarItems ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbarItems ul li a:hover{
+    background-color: #1d3557;
+}
+.buttonMenu {
+    border-radius: 10px;
+}
