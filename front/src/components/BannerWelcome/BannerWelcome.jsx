@@ -4,7 +4,6 @@ import imgBanner2 from "../../assets/imgBanner2.jpg"
 import texts from "../../helpers/texts"
 
 const BannerWelcome = () => {
-    console.log(texts.productos);
     return (
         <div className={styles.sliderContainer}>
             <div className={styles.slider}>

@@ -20,30 +20,35 @@ const getUserById = async (req: Request, res: Response) => {
 const createUser = async (req: Request, res: Response) => {
     const { ...data} = req.body;
     // agrego a la variable el tipo interface : IUser, y envio como object las propiedades destructuradas
-    const newUser: string = await usersServices.createUserService({ ... data });
+    const newUser: User = await usersServices.createUserService({ ... data });
     res.status(201).json({
-        message: `Usuario ${newUser} creado exitosamente.`
+        message: `Usuario ${newUser.name} con ID ${newUser.id} creado exitosamente.`
     });
 
 };
 const loginUser = async (req: Request, res: Response) => {
 
+    const { username, password } = req.body;
+
     try {
-        const authHeader = req.headers.authorization;
-        // campos desactivados == undefined
-        if (!authHeader) {
-            throw new Error('Credenciales no proporcionadas.');
-        }
+        // const authHeader = req.headers.authorization;
+        // // campos desactivados == undefined
+        // if (!authHeader) {
+        //     throw new Error('Credenciales no proporcionadas.');
+        // }
         // campos vacios || datos de acceso
-        await usersServices.loginUserService(authHeader);            
+        // const user = await usersServices.loginUserService(authHeader);       
+        const user = await usersServices.loginUserService({username, password})     
         res.status(200).json({
-            message: `Login correcto, bienvenido`,
+            // login: true, user   //<= HW
+            message: `Bienvenido ${user.name} que bueno tenerte devuelta!`
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).send({
-            mesage: 'EL usuario no existe o los datos ingresados son invalidos'
-        });
+        throw error;
+        // console.error(error);
+        // res.status(500).send({
+        //     mesage: 'EL usuario no existe o los datos ingresados son invalidos'
+        // });
     }
 };
 
@@ -62,7 +67,7 @@ export default {
     getUsers: catchAsync(getUsers),
     getUserById: catchAsync(getUserById),
     createUser: catchAsync(createUser),
-    loginUser,
+    loginUser: catchAsync(loginUser),
     putUser: catchAsync(putUser),
     deleteUser: catchAsync(deleteUser),
 };

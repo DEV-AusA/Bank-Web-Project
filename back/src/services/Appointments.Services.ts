@@ -31,21 +31,24 @@ const getAppointmentByIdService = async (id: number): Promise <Appointment> => {
 // aca uso los dto
 const addAppointmentService = async (dataAppointment: AppointmentDto): Promise<Appointment> => {
     const queryRunner = AppDataSource.createQueryRunner()
+    const errorInvalidId = {
+        message: "No se pudo asignar el turno porque no se encontró al usuario",
+        code: 400,
+        error: "Invalid ID"
+    };
 
     queryRunner.connect()
 
     try {
         queryRunner.startTransaction();
+        if (!dataAppointment.userId)
+        throw (errorInvalidId);
         // verifico el user
         const user = await UserRepository.findOneBy({
             id: dataAppointment.userId
         });
         if(!user)
-        throw ({
-            message: "No se pudo asignar el turno porque no se encontró al usuario",
-            code: 400,
-            error: "Invalid ID"
-        })
+        throw (errorInvalidId);
         const newAppointment : Appointment = await AppointmentRepository.create(dataAppointment);
         await queryRunner.manager.save(newAppointment);
         // fin de la transaction

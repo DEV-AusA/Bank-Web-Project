@@ -6,7 +6,8 @@ import UserRepository from "./User.Repository";
 const AppointmentRepository = AppDataSource.getRepository(Appointment).extend({
 
     findAppointmentById: async function(id: number): Promise<Appointment> {
-        const appointment = await this.findOneBy({ id });
+        // busco por id y establesco relacion con el user
+        const appointment = await this.findOne({ where: { id }, relations: ['user'] });
         if(appointment) return appointment;
         else throw ({
             message: `No se encontró al turno con la id ${id}`,

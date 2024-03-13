@@ -24,7 +24,7 @@ export default {
         const userById: User = await UserRepository.findUserById(id)
         return userById;        
     },
-    createUserService: async (userData: UserDto & CredentialDto): Promise<string> => {
+    createUserService: async (userData: UserDto & CredentialDto): Promise<User> => {
         const queryRunner = AppDataSource.createQueryRunner();
         queryRunner.connect()
         
@@ -52,16 +52,27 @@ export default {
             await queryRunner.release();
         }
 
-        return newUser.name
+        return newUser
     },
-    loginUserService: async (authHeader: string):Promise<void> => {
-        // encoding simple
-        // aca se desarrollará el login del user
-        const encodedCredentials = authHeader.split(' ')[1];
-        const decodedCredentials = Buffer.from(encodedCredentials, 'base64').toString('ascii');
-        const [username, password] = decodedCredentials.split(':');
-        const dataLog: CredentialDto = { username, password };
-        await CredentialsServices.verifyCredentialsService(dataLog);
+    loginUserService: async (loginData : CredentialDto): Promise<User> => {
+        
+        try {
+            const userId = await CredentialsServices.verifyCredentialsService(loginData);
+            
+            if (userId) {
+                const user = await UserRepository.findOneBy({ id: userId });
+                if (user) {
+                    return user;
+                } else {
+                    throw new Error('No se encontró al usuario');
+                }
+            } else {
+                throw new Error('Credenciales inválidas');
+            }
+            
+        } catch (error) {
+            throw error
+        }
     },
     putUserService: async() => {
         //COMIIING SOOON

@@ -10,23 +10,26 @@ export default {
         //retorn el id de las credentials creada        
         return newCredential;
     },
-    verifyCredentialsService: async(verifyCredentials: CredentialDto) => {     
+    verifyCredentialsService: async(verifyCredentials: CredentialDto): Promise<number> => {     
         // busco el username
         const userCredentials = await CredentialRepository.findOneBy({
             username: verifyCredentials.username,
-            // password: verifyCredentials.password
-        });        
-        if (userCredentials) {   
-            if (verifyCredentials.password === userCredentials.password) {
-                return userCredentials.username;
-            }
-            else {
-                throw new Error("La contraseña es incorrecta");
-            }
-        }
-        else {
-            throw new Error(`El usuario no existe`)
-        }
+        });
+        
+        if (!userCredentials)
+        throw({
+            message: "El Usuario no existe",
+            code: 404,
+            error: "User Not Found"
+        });
+        
+        if (verifyCredentials.password !== userCredentials.password)
+        throw({
+            message: "La contraseña es incorrecta",
+            code: 404,
+            error: "Invalid Password"
+        });
+        return userCredentials.id;
     },
 };
 
