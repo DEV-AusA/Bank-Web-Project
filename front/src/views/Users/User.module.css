@@ -1,0 +1,18 @@
+.container {
+	justify-content: center;
+	display: grid;
+}
+
+.table {
+    display: grid;
+    grid-template-columns:  2fr 8fr 5fr 3fr 2fr 3fr;
+}
+
+.table span {
+	background: #3498db;
+	color: white;
+	font-weight: bold;
+	padding: 10px;
+	border: 1px solid #ccc;
+	text-align: left;
+}

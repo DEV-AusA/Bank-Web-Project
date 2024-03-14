@@ -4,16 +4,52 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link, NavLink } from "react-router-dom";
 
 const NavBarItems = () => {
     return(
         <div className={styles.navbarItems}>
             <ul>
-                <li><a href="">Personas</a></li>
-                <li><a href="">Empresas</a></li>
-                <li><a href="">Banca Online</a></li>
-                <li><a href="">Solicita tu Tarjeta Online</a></li>
-                <li><a href="">Contacto</a></li>
+                <li>
+                    <NavLink to="/productsempresas" className={({isActive}) => isActive ? styles.active : ""}>
+                        <span>Empresas</span>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/personas" className={({isActive}) => isActive ? styles.active : ""}>
+                        <span>Personas</span>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/login" className={({isActive}) => isActive ? styles.active : ""}>
+                        <span>Banca Online</span>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/users/register" className={({isActive}) => isActive ? styles.active : ""}>
+                        <span>Solicita tu Producto Online</span>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/users" className={({isActive}) => isActive ? styles.active : ""}>
+                        <span>Usuarios</span>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/appointments" className={({isActive}) => isActive ? styles.active : ""}>
+                        <span>Turnos</span>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/users/:id" className={({isActive}) => isActive ? styles.active : ""}>
+                        <span>Mis turnos</span>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/contact" className={({isActive}) => isActive ? styles.active : ""}>
+                        <span>Contacto</span>
+                    </NavLink>
+                </li>
             </ul>
         </div>
     )

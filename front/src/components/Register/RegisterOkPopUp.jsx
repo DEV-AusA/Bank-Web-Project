@@ -1,7 +1,7 @@
 import styles from "./RegisterOkPopUp.module.css"
 
 const RegisterOkPopUp = ({handleOnClose, message})  =>{
-
+    console.log(handleOnClose);
     return (
         <div className={styles.modalDetails}>
             <p>{message}</p>

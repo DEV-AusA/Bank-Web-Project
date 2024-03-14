@@ -4,9 +4,11 @@ import styles from "./Register.module.css";
 import logoBank from "../../assets/logoBank.png";
 import axios from 'axios';
 import RegisterOkPopUp from "../../components/Register/RegisterOkPopUp";
-;
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+
+    const navigate = useNavigate()
 
     const initialState = {
         name: '',
@@ -75,6 +77,7 @@ const Register = () => {
     const handleOnClose = (event) => {
         event.preventDefault();
         setRegisterOk(false);
+        navigate("/");
     }
 
     const handleReset = (event) => {

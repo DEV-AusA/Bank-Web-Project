@@ -2,3 +2,10 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.titlePrincipal {
+	text-align: center;
+	font-size: 2em;
+	width: 100%;
+	display: inline-block;
+}

@@ -22,6 +22,11 @@
 .navbarItems ul li a:hover{
     background-color: #1d3557;
 }
+
+
+.active{
+    background-color: #1d3557;
+}
 .buttonMenu {
     border-radius: 10px;
 }

@@ -1,0 +1,22 @@
+.table {
+    display: grid;
+    grid-template-columns:  2fr 8fr 5fr 3fr 2fr 3fr;
+}
+
+.table > span {
+    padding: 10px;
+	border: 1px solid #ccc;
+	text-align: left;
+	font-size: 18px;
+}
+.table a {
+	font-size: 18px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+	background: gainsboro;
+	text-decoration: none;
+	font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+

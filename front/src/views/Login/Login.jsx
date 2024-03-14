@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import validateLogin from "../../helpers/validateLogin";
 import RegisterOkPopUp from "../../components/Register/RegisterOkPopUp";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -11,9 +12,7 @@ const Login = () => {
         username: '',
         password: ''
     });
-    //state login
     const [ login, setLogin ] = useState(false);
-    // state del msj de la DB
     const [message, setMessage] = useState('');
     // state que controla errores de inputs
     const [errors, setErrors] = useState({
@@ -23,10 +22,8 @@ const Login = () => {
     //state de activacion de botton si los campos cumplen las validaciones
     const [isValid, setIsValid] = useState(false);
 
-    //^ handleFUNCTION() convencion a estas functions que manejan eventos 
     // esta function recibirá los cambios de los inputs ingresados
     const handleInputChange = (event) => {
-        // obtengo los valores del event.target
         const { name, value } = event.target;
 
         // se actualiza el valor de userData
@@ -37,7 +34,6 @@ const Login = () => {
             [name]: value
         })
         // con cada cambio de state envio el input ingresado a la function validateLogin y lo valido
-        // y la function validateLogin retorna algo
         const errors = validateLogin({
             ...userData,
             [name]:value
@@ -57,16 +53,15 @@ const Login = () => {
             setLogin(true)
         }
     }
-    // hook useEffect 
     useEffect(() => {
         const isFormValid = Object.values(errors).every(error => error === '');
         setIsValid(isFormValid);
     }, [errors]);
-
-    // cambio state de setLogin
+    
+    // Popup despues de login
     const handleOnClose = (event) => {
         event.preventDefault();
-        setLogin(false);
+        setLogin(false);        
     }
 
     return (
