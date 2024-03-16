@@ -3,6 +3,9 @@ import myTurns from "../../helpers/myTurns"
 import AppointmentCard from "../../components/AppointmentCard/AppointmentCard";
 import styles from "./MisTurnos.module.css"
 
+import Table from 'react-bootstrap/Table';
+import Container from "react-bootstrap/esm/Container";
+
 const MisTurnos = () => {
 
     const [appointments, setAppointments] = useState([]);
@@ -24,12 +27,23 @@ const MisTurnos = () => {
     }, []); 
     
     return (
-        <div className={styles.containerturnos}>
-            <h1>Bienvenido al gestor de turnos</h1>
-            <div className={styles.misturnos}>
+        <Container  className={styles.container}>
+            <h1>Bienvenido al gestor de Turnos</h1>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Turno Nro</th>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Usuario ID</th>
+                  <th className="col-2 text-center">Estado del turno</th>
+                  <th className="col-2 text-center">Accion</th>
+                </tr>
+              </thead>
+              <tbody>
                 { appointments.map((turno) => {
                     return (
-                        <div key={turno.id} className={styles.misturnoscard}>
+                        <tr key={turno.id} className={styles.misturnoscard}>
                             <AppointmentCard
                                 id={turno.id}
                                 date={turno.date}
@@ -37,11 +51,12 @@ const MisTurnos = () => {
                                 userId={turno.userId}
                                 status={turno.status}
                             />
-                        </div>
+                        </tr>
                     )
                 })}
-            </div>
-        </div>
+              </tbody>
+            </Table>
+        </Container>
     )
 }
 

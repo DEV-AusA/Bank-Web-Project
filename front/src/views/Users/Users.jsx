@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import UserCard from "../../components/UserCard/UserCard";
-import styles from "./User.module.css"
+import styles from "./Users.module.css";
+
+import Table from 'react-bootstrap/Table';
+import Container from "react-bootstrap/esm/Container";
 
 const Users = () => {
 
@@ -29,33 +32,39 @@ const Users = () => {
         
     }, []); 
     
-    return (
-        <div className={styles.container}>
+    return (   
+        <Container  className={styles.container}>
             <h1>Bienvenido al gestor de usuarios</h1>
-            <div className={styles.table}>
-                <span>User ID</span>
-                <span>Nombre</span>
-                <span>Email</span>
-                <span>Fecha de Nacimiento</span>
-                <span>Numero de DNI</span>
-                <span>Turnos</span>
-            </div>
-                { users.map((user) => {
-                    return (
-                        <div key={user.id} >
-                            <UserCard
-                            id={user.id}
-                            name={user.name}
-                            email={user.email}
-                            birthdate={user.birthdate}
-                            nDni={user.nDni}
-                            userId = {user.id}
-                            // appointments={user.appointments}
-                            />
-                        </div>
-                    )
-                })}
-        </div>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Fecha de Nacimiento</th>
+                  <th>Numero de DNI</th>
+                  <th>Turnos</th>
+                </tr>
+              </thead>
+              <tbody>
+                 { users.map((user) => {
+                        return (
+                            <tr key={user.id} >
+                                <UserCard
+                                id={user.id}
+                                name={user.name}
+                                email={user.email}
+                                birthdate={user.birthdate}
+                                nDni={user.nDni}
+                                userId = {user.id}
+                                // appointments={user.appointments}
+                                />
+                            </tr>
+                        )
+                    })}
+              </tbody>
+            </Table>
+        </Container>
     )
 }
 

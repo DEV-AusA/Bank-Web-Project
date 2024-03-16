@@ -17,7 +17,6 @@ function App() {
   const location = useLocation();
   return (
     <div className= {styles.body}>
-      <Link to="/" className={styles.titlePrincipal}>Este es mi titulo PRINCIPAL</Link>
       {location.pathname !== "/login" && <NavBar />}      
       <Routes>
         <Route path = "/" element={<Home />} />

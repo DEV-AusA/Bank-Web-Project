@@ -1,32 +1,49 @@
 .navbarItems {
     background-color: blue;
 }
-.navbarItems ul {
+.navbarItemsUl {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
-.navbarItems ul li {
+.navbarItemsUl li {
     display: inline;
     float: left;
 }
-.navbarItems ul li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.navbarItems ul li a:hover{
+
+
+.navbarItemsUl li a:hover{
     background-color: #1d3557;
 }
-
 
 .active{
     background-color: #1d3557;
 }
 .buttonMenu {
     border-radius: 10px;
+}
+
+/* TODO NUEVO */
+
+.navbar {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+.navbar a {
+    border-bottom: 2px solid transparent;
+}
+.navbar a:hover{
+    border-bottom: 2px solid;
+}
+.logoBank h1 {
+	font-size: 2em;
+	margin-top: auto;
+	margin-bottom: 0;
+	line-height: 1;    
+	font-weight: bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.logoBank img {
+    width: 120px;
 }

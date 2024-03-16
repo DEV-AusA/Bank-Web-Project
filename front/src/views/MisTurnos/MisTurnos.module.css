@@ -1,13 +1,6 @@
-.containerturnos {
-    display: grid;
-    justify-content: center;
+.container h1 {
+	text-align: center;
 }
-.containerturnos h1{
+.appointment {
     text-align: center;
-}
-.misturnos {
-    width: 1250px;
-}
-.misturnoscard {
-    width: 100%;
 }

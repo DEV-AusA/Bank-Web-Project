@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import validateLogin from "../../helpers/validateLogin";
 import RegisterOkPopUp from "../../components/Register/RegisterOkPopUp";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from "react-bootstrap/esm/Container";
+import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 
 const Login = () => {
 
@@ -65,53 +70,64 @@ const Login = () => {
     }
 
     return (
-        <div className={styles.container}>
+        <Container className={`${styles.container} vh-100 d-flex justify-content-center align-items-center`}>
             <div className={styles.screen}>
                 <div className={styles.screen__content}>
-                    <form className={styles.login} onSubmit={handleOnSubmit}>
-                        <div className={styles.loginBanner}>
+                    <Form className={styles.login} onSubmit={handleOnSubmit}>
+                        <NavLink to="/" className={`${styles.loginBanner} mb- text-decoration-none`}>
                             <h1>Banco</h1>
                             <img src={logoBank}/>
-                        </div>
+                        </NavLink>
                         <div className={styles.loginBannerText}>
-                            <h2>te da la bienvenida</h2>
-                        </div>
-                        <h2>Login</h2>
-                        <div className={styles.login__field}>
-                            <input type="text"
+                             <h3>te da la bienvenida</h3>
+                         </div>
+                        <Form.Group className={`${styles.login__field} mb-3`} controlId="formBasicEmail">
+                            <Form.Control
+                            className="rounded-0"
+                            type="text"
                             placeholder="Username"
                             value={userData.username}
                             name="username"
                             onChange={handleInputChange}
                             />
+                            {/* <Form.Text className="text-muted">
+                            Nunca compartiremos tus datos personales.
+                            </Form.Text> */}
                             {errors.username && <p style={{color:'red', margin: 0}}>{errors.username}</p>}
-                        </div>
-                        <div className={styles.login__field}>
-                            <input type="password"
+                        </Form.Group>
+
+                        <Form.Group className={`${styles.login__field} mb-3`} controlId="formBasicPassword">
+                        <FloatingLabel controlId="floatingInputGrid" label="Password">
+                        
+                            <Form.Control
+                            className="rounded-0"
+                            type="password"                    
                             placeholder="Password"
                             value={userData.password}
                             name="password"
                             onChange={handleInputChange}
                             />
                             {errors.password && <p style={{color:'red', margin: 0}}>{errors.password}</p>}
-                        </div>
-                        <button
+                        </FloatingLabel>
+                        </Form.Group>
+                        <Button
                         className={styles.login__submit}
-                        disabled = {!isValid}>
+                        disabled = {!isValid}
+                        variant="primary"
+                        type="submit">
                             <span>Ingresar</span>
-                        </button>
-
+                        </Button>
                         {login && <RegisterOkPopUp handleOnClose = {handleOnClose} message = {message}/>}
-                    </form>
+                    </Form>
                 </div>
                 <div className={styles.screen__background}>
-                    <span className={`${styles.screen__background__shape} ${styles.screen__background__shape4}`} ></span>
-                    <span className={`${styles.screen__background__shape} ${styles.screen__background__shape3}`} ></span>		
-                    <span className={`${styles.screen__background__shape} ${styles.screen__background__shape2}`} ></span>
-                    <span className={`${styles.screen__background__shape} ${styles.screen__background__shape1}`} ></span>
-                </div>
+                     <span className={`${styles.screen__background__shape} ${styles.screen__background__shape4}`} ></span>
+                     <span className={`${styles.screen__background__shape} ${styles.screen__background__shape3}`} ></span>		
+                     <span className={`${styles.screen__background__shape} ${styles.screen__background__shape2}`} ></span>
+                     <span className={`${styles.screen__background__shape} ${styles.screen__background__shape1}`} ></span>
+                 </div>
             </div>
-        </div>
+        </Container>
     );
 };
 

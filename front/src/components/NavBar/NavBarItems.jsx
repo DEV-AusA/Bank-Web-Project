@@ -1,74 +1,68 @@
 import styles from "./NavBarItems.module.css"
+import logoBank from "../../assets/logoBank.png"
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavBarItems = () => {
+    
     return(
-        <div className={styles.navbarItems}>
-            <ul>
-                <li>
-                    <NavLink to="/productsempresas" className={({isActive}) => isActive ? styles.active : ""}>
+        <Navbar expand="lg" className="bg-body-tertiary p-0">
+            <Container>
+                <Navbar className="bg-body-tertiary col- p-0">
+                    <Container>
+                        <Navbar.Brand className={`m-0 d-flex justify-content-center ${styles.logoBank}`}>
+                            <h1>Banco</h1>
+                            <img
+                            src={logoBank}
+                            className="d-inline-block align-top"
+                            alt="Bank logo"
+                            />
+                        </Navbar.Brand>
+                    </Container>
+                </Navbar>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className={`${styles.navbar} me-auto`}>
+                    <NavLink to="/productsempresas" className={`${({isActive}) => isActive ? styles.active : ""} nav-link`}>
                         <span>Empresas</span>
                     </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/personas" className={({isActive}) => isActive ? styles.active : ""}>
-                        <span>Personas</span>
+                    <NavLink to="/personas" className={`${({isActive}) => isActive ? styles.active : ""} nav-link`}>
+                            <span>Personas</span>
                     </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/login" className={({isActive}) => isActive ? styles.active : ""}>
+                    <NavLink to="/login" className={`${({isActive}) => isActive ? styles.active : ""} nav-link`}>
                         <span>Banca Online</span>
                     </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/users/register" className={({isActive}) => isActive ? styles.active : ""}>
-                        <span>Solicita tu Producto Online</span>
+                    <NavLink to="/users/register" className={`${({isActive}) => isActive ? styles.active : ""} nav-link`}>
+                        <span>Solicita tu Producto</span>
                     </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/users" className={({isActive}) => isActive ? styles.active : ""}>
+                    <NavLink to="/users" className={`${({isActive}) => isActive ? styles.active : ""} nav-link`}>
                         <span>Usuarios</span>
                     </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/appointments" className={({isActive}) => isActive ? styles.active : ""}>
+                    <NavLink to="/appointments" className={`${({isActive}) => isActive ? styles.active : ""} nav-link`}>
                         <span>Turnos</span>
                     </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/users/:id" className={({isActive}) => isActive ? styles.active : ""}>
+                    <NavLink to="/users/:id" className={`${({isActive}) => isActive ? styles.active : ""} nav-link`}>
                         <span>Mis turnos</span>
                     </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/contact" className={({isActive}) => isActive ? styles.active : ""}>
+                    <NavLink to="/contact" className={`${({isActive}) => isActive ? styles.active : ""} nav-link`}>
                         <span>Contacto</span>
                     </NavLink>
-                </li>
-            </ul>
-        </div>
+                    {/* button */}
+                    <NavDropdown title="Menu" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#">Préstamos</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Seguros</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Inversión</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#">Catalogo de puntos</NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     )
 }
-// const NavBarItems = () => {
-//     return(
-//         <div className={styles.navbarItems}>
-//         <Navbar bg="primary" data-bs-theme="dark">
-//             <Container>
-//             <Navbar.Brand href="#home">Personas</Navbar.Brand>
-//             <Navbar.Brand href="#home">Empresas</Navbar.Brand>
-//             <Nav className="me-auto">
-//                 <Nav.Link href="#home">Banca Online</Nav.Link>
-//                 <Nav.Link href="#home">Solicita tu Tarjeta Online</Nav.Link>
-//                 <Nav.Link href="#home">Contacto</Nav.Link>
-//             </Nav>
-//             </Container>
-//         </Navbar>
-//         </div>
-//     )
-// }
 export default NavBarItems

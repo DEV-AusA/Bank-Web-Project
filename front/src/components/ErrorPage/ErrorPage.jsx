@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
+import error404 from  "../../assets/404.png"
 
 const ErrorPage = () => {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ const ErrorPage = () => {
         <div>
             <h1>Page not Found</h1>
             <p>Redirecting to home in {countdown} seconds....</p>
+            <img src={error404} alt="error404" />
         </div>
     )
 }

@@ -17,6 +17,8 @@ export default {
                 appointments: true
             }
         })
+        // Ordena la lista de usuarios por su ID
+        users.sort((a, b) => a.id - b.id);
         return users;
     },
     getUserByIdService: async(id: number): Promise<User> => {

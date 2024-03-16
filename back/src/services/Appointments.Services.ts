@@ -14,6 +14,8 @@ const getAppointmentsService = async (): Promise<IAppointment[]> => {
         }
     })
     if(appointments.length) {
+        // Ordena la lista de turnos por su ID
+        appointments.sort((a, b) => a.id - b.id);
         return appointments;
     }
     else throw ({

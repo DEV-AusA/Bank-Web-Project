@@ -17,9 +17,10 @@ const AppointmentRepository = AppDataSource.getRepository(Appointment).extend({
     },
     findAppointmentWithUser: async function(idApp:number, idUser: number): Promise<Boolean> {
         const appointment: Appointment = await this.findAppointmentById(idApp);
-        const user: User = await UserRepository.findUserById(idUser);
+        // const user: User = await UserRepository.findUserById(idUser);
 
-        if (appointment.userId === user.id) return true;
+        if (appointment.user && appointment.user.id === idUser) return true;
+        // if (appointment.userId === user.id) return true;
         else throw ({
             message: `El turno para el usuario no existe en el los registros`,
             code: 404,

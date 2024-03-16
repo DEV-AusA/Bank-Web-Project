@@ -1,18 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .screen {		
 	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
 	position: relative;	
-	height: 600px;
-	width: 360px;	
 	box-shadow: 0px 0px 24px #5C5696;
 }
 
@@ -40,11 +34,11 @@
 }
 
 .screen__background__shape1 {
-	height: 520px;
+	height: 790px;
 	width: 520px;
 	background: #FFF;	
-	top: -50px;
-	right: 120px;	
+	top: -161px;
+	right: 235px;	
 	border-radius: 0 72px 0 0;
 }
 
@@ -76,33 +70,46 @@
 }
 /* form login*/
 .login {
-	width: 320px;
-	padding: 30px;
-	padding-top: 50px;
+	width: 500px;
+	padding: 80px;
 }
 .loginBanner {
     display: flex;
     justify-content: center;
 }
 
-.login img {
+.loginBanner h1 {
+	font-size: 3em;
+	margin-top: auto; /* Empuja el h2 hacia abajo */
+	margin-bottom: 0; /* Elimina cualquier margen inferior */
+	line-height: 1;
+	color: black;
+	font-weight: bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loginBanner img {
     width: 50%;
 }
 
-.login h1 {
-    font-size: 3em;
-    margin-top: auto; /* Empuja el h2 hacia abajo */
-    margin-bottom: 0; /* Elimina cualquier margen inferior */
-	line-height: 1.1;
+.loginBannerText {
+	margin-bottom: 20px;
 }
-.loginBannerText h2{
+.loginBannerText h3{
     margin: 0;
-	text-align: center;
+	text-align: right;
+	font-size: 1.2em;
+	padding-right: 30px;
 }
 
 .login__field {
-	padding: 20px 0px;	
-	position: relative;	
+	position: relative;
+	text-align: center;
+}
+
+.login__field h2 {
+	font-weight: bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login input {
