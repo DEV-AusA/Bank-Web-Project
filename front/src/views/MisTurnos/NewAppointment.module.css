@@ -1,28 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
-
-.screen {		
+.screen {
 	background: linear-gradient(90deg, #1d3557, #2a63b5);
-	position: relative;	
-	height: auto;
-	width: auto;	
+	position: relative;
 	box-shadow: 0px 0px 24px #1d3557;
 }
 
-.screen__content {
+.screenContent {
 	z-index: 1;
 	position: relative;	
 	height: 100%;
-    display: flex;
-    justify-content: center;
-    /* width: 50%; */
 }
 
 /* Colores de fondo*/
@@ -43,126 +33,131 @@
 }
 
 .screen__background__shape1 {
-	height: 1296px;
+	height: 790px;
 	width: 520px;
-	background: #FFF;
-	top: -323px;
-	right: 495px;
+	background: #FFF;	
+	top: -161px;
+	right: 235px;	
 	border-radius: 0 72px 0 0;
 }
 
 .screen__background__shape2 {
 	height: 220px;
 	width: 220px;
-	background: #0077b6;
-	top: -202px;
-	right: -32px;
+	background: #0077b6;	
+	top: -172px;
+	right: 0;	
 	border-radius: 32px;
 }
 
 .screen__background__shape3 {
-	height: 829px;
+	height: 540px;
 	width: 190px;
-	background: linear-gradient(90deg, #2b79db, #022857);
-	top: -121px;
-	right: 35px;
+	background: linear-gradient(270deg, #023e8a, #022857);
+	top: -24px;
+	right: 0;	
 	border-radius: 32px;
 }
 
 .screen__background__shape4 {
-	height: 669px;
+	height: 400px;
 	width: 200px;
 	background: #0077b6;
-	top: 223px;
-	right: -4px;
+	top: 420px;
+	right: 50px;	
 	border-radius: 60px;
 }
-/* form register*/
-.register {
-	width: auto;
-	padding: 30px;
-	padding-top: 50px;
+/* form Appointment*/
+.formAppointment {
+	max-width: 500px;
+	padding: 80px;
 }
-.registerBanner {
+.formAppointmentBanner {
     display: flex;
     justify-content: center;
 }
 
-.registerBanner img {
-    width: 20%;
-}
-
-.registerBanner h1 {
-    font-size: 3em;
-    margin-top: auto; /* Empuja el h2 hacia abajo */
-    margin-bottom: 0; /* Elimina cualquier margen inferior */
+.formAppointmentBanner h1 {
+	margin-top: auto; /* Empuja el h2 hacia abajo */
+	margin-bottom: 0; /* Elimina cualquier margen inferior */
 	line-height: 1;
+	color: black;
 	font-weight: bold;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.registerBanner h2{
+
+.formAppointmentBanner img {
+    width: 50%;
+}
+
+.formAppointmentBannerText {
+	margin-bottom: 20px;
+}
+.formAppointmentBannerText h3{
     margin: 0;
+	text-align: right;
+	font-size: 1.2em;
+	padding-right: 30px;
+}
+
+.formAppointmentField {
+	position: relative;
 	text-align: center;
 }
-
-.register__field {
-	padding: 20px 10px;
-	clear: both
+.formAppointmentError {
+	color:red;
+	text-align: left;
 }
 
-.register__field__mid {
-	width: 33.3%;
-	float: left;
-	box-sizing: border-box;
-	padding: 20px 10px;
+.formAppointmentField h2 {
+	font-weight: bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-.register input {
+.formAppointment input {
 	border: none;
 	border-bottom: 2px solid #D1D1D4;
 	background: none;
 	padding: 10px 0;
     font-family: Raleway, sans-serif;
 	font-weight: 700;
-	width: 100%;
+	width: 75%;
 	transition: .2s;
 }
 
-.register input:active,
-.register input:focus,
-.register input:hover {
+.formAppointment input:active,
+.formAppointment input:focus,
+.formAppointment input:hover {
 	outline: none;
 	border-bottom-color: #0077b6;
 }
 
-.register__btn__submit {
-    text-align: center;
-}
-.register__submit {
+.formAppointmentSubmit {
 	background: #fff;
 	font-size: 14px;
-	margin: 20px;
+	margin-top: 30px;
 	padding: 16px 20px;
 	border-radius: 26px;
 	border: 1px solid #D4D3E8;
 	text-transform: uppercase;
 	font-weight: 700;
-	width: 30%;
+	display: flex;
+	align-items: center;
+	width: 100%;
 	color: #023e8a;
 	box-shadow: 0px 2px 2px #023e8a;
 	cursor: pointer;
 	transition: .2s;
 }
-.register__submit:disabled {
+.formAppointmentSubmit:disabled {
     background-color: #ccc;
     color: #666;
     cursor: not-allowed; /* desactiva el mouse al pasar x el boton */
 }
 
-.register__submit:active,
-.register__submit:focus,
-.register__submit:hover {
+.formAppointmentSubmit:active,
+.formAppointmentSubmit:focus,
+.formAppointmentSubmit:hover {
 	border-color: #0077b6;
 	outline: none;
 }

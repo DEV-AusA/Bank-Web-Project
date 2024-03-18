@@ -3,11 +3,10 @@
 .container {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
-
-.screen {		
-	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
-	position: relative;	
-	box-shadow: 0px 0px 24px #5C5696;
+.screen {
+	background: linear-gradient(90deg, #1d3557, #2a63b5);
+	position: relative;
+	box-shadow: 0px 0px 24px #1d3557;
 }
 
 .screen__content {
@@ -45,7 +44,7 @@
 .screen__background__shape2 {
 	height: 220px;
 	width: 220px;
-	background: #6C63AC;	
+	background: #0077b6;	
 	top: -172px;
 	right: 0;	
 	border-radius: 32px;
@@ -54,7 +53,7 @@
 .screen__background__shape3 {
 	height: 540px;
 	width: 190px;
-	background: linear-gradient(270deg, #5D54A4, #6A679E);
+	background: linear-gradient(270deg, #023e8a, #022857);
 	top: -24px;
 	right: 0;	
 	border-radius: 32px;
@@ -63,7 +62,7 @@
 .screen__background__shape4 {
 	height: 400px;
 	width: 200px;
-	background: #7E7BB9;	
+	background: #0077b6;
 	top: 420px;
 	right: 50px;	
 	border-radius: 60px;
@@ -127,7 +126,7 @@
 .login input:focus,
 .login input:hover {
 	outline: none;
-	border-bottom-color: #6A679E;
+	border-bottom-color: #0077b6;
 }
 
 .login__submit {
@@ -142,8 +141,8 @@
 	display: flex;
 	align-items: center;
 	width: 100%;
-	color: #4C489D;
-	box-shadow: 0px 2px 2px #5C5696;
+	color: #023e8a;
+	box-shadow: 0px 2px 2px #023e8a;
 	cursor: pointer;
 	transition: .2s;
 }
@@ -156,6 +155,6 @@
 .login__submit:active,
 .login__submit:focus,
 .login__submit:hover {
-	border-color: #6A679E;
+	border-color: #0077b6;
 	outline: none;
 }

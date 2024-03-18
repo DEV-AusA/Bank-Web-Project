@@ -78,6 +78,14 @@ const cancelAppointmentService = async (idApp: number, userId: number, status: b
         const appointment: Appointment = await getAppointmentByIdService(idApp);
         // si coinciden el turno asignado con el del que tiene el user y si status esta definido
         if (appointmentWithUser && status !== undefined) {
+
+            if (appointment.status !== true) {
+                throw ({
+                    message: `El turno con ID ${appointment.id} y con fecha ${appointment.date} ya no esta disponible, fue cancelado anteriormente`,
+                    code: 400,
+                    status: "Invalid Appoinment"
+                });
+            }
             // const user: User = await UserRepository.findUserById(userId)
             appointment.status = status;
             await queryRunner.manager.save(appointment);

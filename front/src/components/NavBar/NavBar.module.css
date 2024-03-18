@@ -1,3 +1,7 @@
 .navbar {
-    background-color: #a8dadc;
+    /* background-color: #457b9d; */
+    background: linear-gradient(90deg, #0263be, #0263be);
+    position: relative;
+    box-shadow: 0px 0px 24px #000;
+    z-index: 2;
 }

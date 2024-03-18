@@ -1,12 +1,20 @@
+import Container from "react-bootstrap/esm/Container";
 import BannerWelcome from "../../components/BannerWelcome/BannerWelcome";
-import Login from "../../views/Login/Login";
 import styles from "./Home.module.css"
+import Footer from "../../components/Footer/Footer";
+import NewsAPP from "../../components/News/NewsAPP";
 
 const Home = () => {
   return (
-    <div className={styles.container}>
-      <BannerWelcome />      
-    </div>
+    <Container fluid className="p-0">
+      <BannerWelcome />
+      <Container>
+        <NewsAPP/>
+      </Container>
+      <Container>
+        <Footer />        
+      </Container>
+    </Container>
   );
 };
 

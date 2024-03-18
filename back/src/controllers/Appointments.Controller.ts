@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import IAppointment from "../interfaces/IAppointment";
 import AppointmentsServices from "../services/Appointments.Services";
 import catchAsync from "../utils/catchAsync";
+import formatHour from "../utils/FormatHour";
 
 
 
@@ -25,8 +26,10 @@ const addAppointment = async (req: Request, res: Response) => {
     userId,
     // status,
   });
+  const timeAppo = formatHour(appointment.time);
+
   res.status(201).json({
-    message: `Turno creado correctamente para el dia ${appointment?.date} a las ${appointment?.time}`,
+    message: `Turno creado correctamente para el dia ${appointment?.date} a las ${timeAppo}`,
   });
 };
 // en el req pongo el tipo de dato a recibir y que solamente usara parcialmente algunos datos de la interface IAppointment  <{id: string}, Partial<IAppointment>>
@@ -36,8 +39,9 @@ const cancelAppointment = async (req: Request, res: Response) => {
   // obtengo los datos del body
   const { userId, status } = req.body; 
     const appointment = await AppointmentsServices.cancelAppointmentService(Number(id), userId, status);
+    const timeAppo = formatHour(appointment.time);
     res.status(200).json({
-      message: `El turno con fecha ${appointment.date} para las ${appointment.time} fue sido cancelado correctamente`
+      message: `El turno con fecha ${appointment.date} para las ${timeAppo} fue cancelado correctamente`
     });     
 
 };

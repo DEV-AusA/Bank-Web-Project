@@ -40,15 +40,13 @@ const loginUser = async (req: Request, res: Response) => {
         // const user = await usersServices.loginUserService(authHeader);       
         const user = await usersServices.loginUserService({username, password})     
         res.status(200).json({
-            // login: true, user   //<= HW
-            message: `Bienvenido ${user.name} que bueno tenerte devuelta!`
+            message: `Bienvenido ${user.name} que bueno tenerte devuelta!`,
+            loginUser: {
+                login: true, user   //<= HW
+            }
         });
     } catch (error) {
         throw error;
-        // console.error(error);
-        // res.status(500).send({
-        //     mesage: 'EL usuario no existe o los datos ingresados son invalidos'
-        // });
     }
 };
 

@@ -5,10 +5,35 @@ import styles from "./MisTurnos.module.css"
 
 import Table from 'react-bootstrap/Table';
 import Container from "react-bootstrap/esm/Container";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppointmentsData } from "../../Redux/userSlice";
 
 const MisTurnos = () => {
 
-    const [appointments, setAppointments] = useState([]);
+    // login de user
+    const loggedInUsers = useSelector(state => state.users.userDataLogin);
+    // todos los appointments
+    const appointmentsData = useSelector(state => state.users.usersAppointments);
+    // adornar hora
+    const formatHour = (hour) => {
+      const hourString = hour.toString();        
+      const formattedHour = hourString.slice(0, 2) + ':' + hourString.slice(2); // divido los 4 digitos en 2  al principio y aumento los ":" 
+      return formattedHour;
+    }
+
+    // const [appointments, setAppointments] = useState([]);
+
+    const navigate = useNavigate();
+    // guardo los dispatch dentro de reducers
+    const dispatch = useDispatch();
+
+    // mandar al home si el loggedInUsers es false
+    useEffect(() => {
+        if (!loggedInUsers.login) {
+            navigate("/");
+        }
+    }, [loggedInUsers.login, navigate]);
 
     useEffect(() => {
 
@@ -16,7 +41,8 @@ const MisTurnos = () => {
           try {
             const response = await fetch(`http://localhost:3000/appointments`);
             const data = await response.json();
-            setAppointments(data);
+            // setAppointments(data);
+            dispatch(AppointmentsData(data))
           } catch (error) {
             console.error("Error al obtener los datos de la DB:", error);
           }
@@ -24,9 +50,9 @@ const MisTurnos = () => {
       
         fetchData();
         
-    }, []); 
+    }, []);
     
-    return (
+    return loggedInUsers.login ? (
         <Container  className={styles.container}>
             <h1>Bienvenido al gestor de Turnos</h1>
             <Table striped bordered hover>
@@ -41,13 +67,13 @@ const MisTurnos = () => {
                 </tr>
               </thead>
               <tbody>
-                { appointments.map((turno) => {
+                { appointmentsData.map((turno) => {
                     return (
                         <tr key={turno.id} className={styles.misturnoscard}>
                             <AppointmentCard
                                 id={turno.id}
                                 date={turno.date}
-                                time={turno.time}
+                                time={formatHour(turno.time)}
                                 userId={turno.userId}
                                 status={turno.status}
                             />
@@ -57,7 +83,7 @@ const MisTurnos = () => {
               </tbody>
             </Table>
         </Container>
-    )
+    ) : null;
 }
 
 export default MisTurnos

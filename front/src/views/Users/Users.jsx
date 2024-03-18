@@ -4,10 +4,29 @@ import styles from "./Users.module.css";
 
 import Table from 'react-bootstrap/Table';
 import Container from "react-bootstrap/esm/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { UsersData } from "../../Redux/userSlice";
 
 const Users = () => {
 
-    const [users, setUsers] = useState([]);
+    // login de user
+    const loggedInUsers = useSelector(state => state.users.userDataLogin.login);
+    // users de store global
+    const usersData = useSelector(state => state.users.usersData);
+
+    const navigate = useNavigate();
+    // guardo los dispatch dentro de reducers
+    const dispatch = useDispatch();
+
+    // const [users, setUsers] = useState([]);
+
+    // mandar al home si el loggedInUsers es false
+    useEffect(() => {
+        if (!loggedInUsers) {
+            navigate("/");
+        }
+    }, [loggedInUsers, navigate]);
 
     useEffect(() => {
 
@@ -22,7 +41,8 @@ const Users = () => {
             });
 
             const data = await response.json();
-            setUsers(data);
+            dispatch(UsersData(data))
+            // setUsers(data);
           } catch (error) {
             console.error("Error al obtener los datos de la DB:", error);
           }
@@ -47,7 +67,7 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                 { users.map((user) => {
+                 { usersData.map((user) => {
                         return (
                             <tr key={user.id} >
                                 <UserCard

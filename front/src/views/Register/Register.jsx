@@ -3,7 +3,7 @@ import validate from "../../helpers/validate";
 import styles from "./Register.module.css";
 import logoBank from "../../assets/logoBank.png";
 import axios from 'axios';
-import RegisterOkPopUp from "../../components/Register/RegisterOkPopUp";
+import PopUpOk from "../../components/PopUpOk/PopUpOk";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -172,7 +172,7 @@ const Register = () => {
                         </div>
 
                         <div>
-                            {registerOk && <RegisterOkPopUp handleOnClose = {handleOnClose} message = {message}/>}
+                            {registerOk && <PopUpOk handleOnClose = {handleOnClose} message = {message}/>}
                         </div>
 
                     </form>

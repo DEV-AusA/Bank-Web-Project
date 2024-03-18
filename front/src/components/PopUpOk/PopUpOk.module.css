@@ -1,0 +1,44 @@
+
+.modalBg {
+    font-size: larger;
+    font-weight: bold;
+    background: linear-gradient(270deg, rgba(2, 62, 138, 0.7), rgba(2, 40, 87, 0.7));
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+}
+
+.modalHeadBody {
+    display: flex;
+    align-items: end;
+}
+.modalHeadBody h4{
+    margin-top: auto; /* Empuja el h2 hacia abajo */
+	margin-bottom: 0; /* Elimina cualquier margen inferior */
+	line-height: 1;
+}
+.modalHeadBody img {
+    max-width: 80px;
+}
+
+.buttonDetail {
+    background: #fff;
+	font-size: 14px;
+	margin-top: 30px;
+	padding: 16px 20px;
+	border-radius: 26px;
+	border: 1px solid #D4D3E8;
+	text-transform: uppercase;
+	font-weight: 700;
+	color: #023e8a;
+	box-shadow: 0px 2px 2px #023e8a;
+	cursor: pointer;
+	transition: .2s;
+	margin-inline: 10px;
+}
+
+.buttonDetail:active,
+.buttonDetail:focus,
+.buttonDetail:hover {
+	border-color: #0077b6;
+	outline: none;
+}
