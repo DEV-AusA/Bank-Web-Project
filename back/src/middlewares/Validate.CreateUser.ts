@@ -4,7 +4,7 @@ import catchAsync from "../utils/catchAsync";
 // fx que valida formato fecha
 const isValidDateFormat = (dateString: string): boolean => {
     // Expresión regular para validar el formato dd-mm-yyyy
-    const regex = /^\d{2}-\d{2}-\d{4}$/;
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
     return regex.test(dateString);
 };
 
@@ -56,7 +56,7 @@ const validateCreateUser = async(req: Request, res: Response, next: NextFunction
             });
         }
     }// nDni
-    if (!nDni || typeof nDni !== "number") {
+    if (!nDni || typeof nDni !== "string") {
         throw ({
             message: "Validando DNI: El DNI ingresado es incorrecto",
             code: 400,

@@ -14,6 +14,13 @@ import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import { useDispatch } from "react-redux";
 import { UserLogin } from "../../Redux/userSlice";
 
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
+import ImgBanner6 from "../../assets/ImgBanner6.jpg"
+import texts from "../../helpers/texts"
+
 const Login = () => {
 
     const [userData, setUserData] = useState({
@@ -80,15 +87,18 @@ const Login = () => {
     const [modalShow, setModalShow] = useState(false);
 
     return (
-        <Container className={`${styles.container} vh-100 d-flex justify-content-center align-items-center`}>
+        <Container fluid className={`${styles.container} vh-100 d-flex justify-content-center align-items-center p-0 m-0`}>
+            {/* <Row xs={1} md={2} className={`${styles.bannerLeftLogin} m-0 p-0 col-2`}>
+                    <Card.Img className="m-0 p-0" variant="top" src={ImgBanner6} fluid="true"/>
+            </Row> */}
             <div className={styles.screen}>
                 <div className={styles.screen__content}>
                     <Form className={styles.login} onSubmit={handleOnSubmit}>
                         <NavLink to="/" className={`${styles.loginBanner} mb- text-decoration-none`}>
-                            <h1>Banco</h1>
+                            <h1 className="display-4">Banco</h1>
                             <img src={logoBank}/>
                         </NavLink>
-                        <div className={styles.loginBannerText}>
+                        <div className={`${styles.loginBannerText}`}>
                              <h3>te da la bienvenida</h3>
                          </div>
                         <Form.Group className={`${styles.login__field} mb-3`} >
@@ -137,6 +147,13 @@ const Login = () => {
                      <span className={`${styles.screen__background__shape} ${styles.screen__background__shape2}`} ></span>
                      <span className={`${styles.screen__background__shape} ${styles.screen__background__shape1}`} ></span>
                  </div>
+            </div>
+            <div className={styles.screenBg}>
+                    <span className={`${styles.screenBgShape} ${styles.screenBgShape5}`} ></span>
+                     <span className={`${styles.screenBgShape} ${styles.screenBgShape4}`} ></span>
+                     <span className={`${styles.screenBgShape} ${styles.screenBgShape3}`} ></span>		
+                     <span className={`${styles.screenBgShape} ${styles.screenBgShape2}`} ></span>
+                     <span className={`${styles.screenBgShape} ${styles.screenBgShape1}`} ></span>
             </div>
         </Container>
     );

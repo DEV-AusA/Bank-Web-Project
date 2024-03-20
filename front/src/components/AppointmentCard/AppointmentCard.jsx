@@ -4,18 +4,23 @@ import { useState } from "react";
 import PopUpOk from "../PopUpOk/PopUpOk";
 import { useDispatch, useSelector } from "react-redux";
 import { UserAppointments } from "../../Redux/userSlice";
+import { dateToString, formatDate } from "../../helpers/formatDate";
 
 const AppointmentCard = ({id, date, time, userId, status}) => {
-    let estado = status ? "vigente" : "cancelado";
-    let colorState = estado === "vigente" ? styles.state : styles.stateCancel;
+
+    const isCancelable = () => {
+        const dateDB = formatDate(date);
+        const today = new Date();
+        const formatDateDb = new Date(dateToString(dateDB));
+        const formatToday = new Date(dateToString(today));
+
+        return formatDateDb <= formatToday || !status;
+    };
 
     // appointments de user
     const appointmentsUser = useSelector(state => state.users.userDataAppointments);
 
     const [appointmentStatus, setAppointmentStatus] = useState(status);
-    const [cancelColor, setCancelColor] = useState(colorState);
-    const [cancelAppointment, setCancelAppointment] = useState(estado);
-    const [buttonDisabled, setButtonDisabled] = useState(!status);
     const [message, setMessage] = useState('');
     const [popUp, setPoPuP] = useState(false);
 
@@ -51,10 +56,7 @@ const AppointmentCard = ({id, date, time, userId, status}) => {
             dispatch(UserAppointments(updatedAppointments));
 
             setAppointmentStatus(!appointmentStatus);
-            setCancelColor(styles.stateCancel);
-            setCancelAppointment("cancelado");
             setMessage(data.message);
-            setButtonDisabled(true);
             setPoPuP(true); 
           } catch (error) {
             console.error("Error al realizar la actualización:", error);
@@ -70,12 +72,14 @@ const AppointmentCard = ({id, date, time, userId, status}) => {
             <td>{date}</td>
             <td>{time}</td>
             <td>{userId}</td>
-            <td className= {`${cancelColor} text-center text-white fw-bold`}>{cancelAppointment}</td>
+            <td className= {`${status ? styles.state : styles.stateCancel } text-center text-white fw-bold`}>{status ? "vigente" : "cancelado"}</td>
             <td className="d-flex justify-content-center">
                 <Button
+                className="fw-bold"
                 type="button"
-                disabled={buttonDisabled}
-                variant="warning"
+                disabled={isCancelable()}
+                // disabled={!status}
+                variant="outline-danger"
                 onClick={() => {
                     updateAppointment();
                     setModalShow(true);

@@ -14,7 +14,6 @@ const PopUpOk = (props)  =>{
         event.preventDefault();
         navigate("/");
     }
-    
 
     return (
 
@@ -23,7 +22,7 @@ const PopUpOk = (props)  =>{
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        className={styles.modalBg}
+        className={`${styles.modalBg}`}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter" className={styles.modalHeadBody}>
@@ -32,19 +31,13 @@ const PopUpOk = (props)  =>{
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>{props.message}</p>
+          {props.message}
         </Modal.Body>
         <Modal.Footer>
           <Button className={styles.buttonDetail} onClick={props.onHide}>Volver</Button>
           <Button className={styles.buttonDetail} onClick={goHome}>Ir a pagina principal</Button>
         </Modal.Footer>
       </Modal>
-
-        // <div className={styles.modalDetails}>
-        //     <p>{message}</p>
-        //         <button className={styles.buttonDetail} onClick={handleOnClose}>Volver</button>
-        //         <button className={styles.buttonDetail} onClick={goHome}>Pagina Principal</button>
-        // </div>
     )
 }
 

@@ -3,7 +3,7 @@ const texts = {
     tarjetaGold: "Descubre el privilegio de la exclusividad con la tarjeta de crédito AusA Gold.",
     tarjetaGoldFooter: "Donde cada transacción te acerca más a experiencias únicas y beneficios exclusivos.",
     productosSpot: "¡Descubre la diversidad financiera con AusA!",
-    productos: "En Banco AusA, ofrecemos una amplia gama de productos financieros diseñados para satisfacer tus necesidades.",     
+    productos: "Ofrecemos una gama de productos financieros diseñados para satisfacer tus necesidades.",     
     productosFooter: "Desde cuentas corrientes hasta inversiones, estamos aquí para ayudarte a alcanzar tus metas financieras.",
     tarjetasDeCreditoSpot: "¡Con AusA, tus compras tienen recompensa!",
     tarjetasDeCredito: "Con las tarjetas de crédito del Banco AusA, cada compra es una oportunidad para acumular puntos y acceder a beneficios exclusivos.",

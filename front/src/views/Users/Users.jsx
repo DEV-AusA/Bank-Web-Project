@@ -19,8 +19,6 @@ const Users = () => {
     // guardo los dispatch dentro de reducers
     const dispatch = useDispatch();
 
-    // const [users, setUsers] = useState([]);
-
     // mandar al home si el loggedInUsers es false
     useEffect(() => {
         if (!loggedInUsers) {
@@ -50,11 +48,11 @@ const Users = () => {
       
         fetchData();
         
-    }, []); 
+    }, []);
     
     return (   
         <Container  className={styles.container}>
-            <h1>Bienvenido al gestor de usuarios</h1>
+            <h1 className="display-3 fs-2 p-3 fw-bold">Bienvenido al gestor de usuarios</h1>
             <Table striped bordered hover>
               <thead>
                 <tr>

@@ -1,5 +1,6 @@
 import styles from "./NavBarItems.module.css"
 import logoBank from "../../assets/logoBank.png"
+import iconUser from "../../assets/iconUser.jpg"
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -11,6 +12,7 @@ import { useState } from "react";
 import { UserLogin } from "../../Redux/userSlice";
 import PopUpOk from "../PopUpOk/PopUpOk";
 import Image from 'react-bootstrap/Image';
+import Badge from 'react-bootstrap/Badge';
 
 const NavBarItems = () => {    
     // traigo el login del state
@@ -46,6 +48,16 @@ const NavBarItems = () => {
     
     return(
         <Navbar expand="lg" className="bg-body-tertiary p-0">
+            <Nav className={`${styles.titles}`}>
+            <Container className={`${styles.titlesContainer} d-flex`}>
+                <NavLink to="/productsempresas" className="nav-link">
+                    <span className="display-8">Empresas</span>
+                </NavLink>
+                <NavLink to="/personas" className="nav-link">
+                    <span className="display-8">Personas</span>
+                </NavLink>
+            </Container>
+            </Nav>
             <Container className={`${styles.container}`}>
                 <Navbar className="bg-body-tertiary col- p-0">
                     <Container>
@@ -62,13 +74,7 @@ const NavBarItems = () => {
                 </Navbar>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className={`${styles.navbar} me-auto`}>
-                    <NavLink to="/productsempresas" className="nav-link">
-                        <span>Empresas</span>
-                    </NavLink>
-                    <NavLink to="/personas" className="nav-link">
-                            <span>Personas</span>
-                    </NavLink>
+                <Nav className={`${styles.navbar} me-auto`}>                    
                     {!loggedInUsers.login &&
                         <NavLink to="/login" className="nav-link">
                             <span>Banca Online</span>
@@ -82,11 +88,13 @@ const NavBarItems = () => {
                     {loggedInUsers.login && 
                         <NavLink to="/users" className="nav-link">
                             <span>Usuarios</span>
+                            <Badge bg="danger">admin</Badge>
                         </NavLink>
                     }
                     {loggedInUsers.login && 
                         <NavLink to="/appointments" className="nav-link">
                             <span>Turnos</span>
+                            <Badge bg="danger">admin</Badge>
                         </NavLink>
                     }                   
                     {loggedInUsers.login && 
@@ -121,7 +129,48 @@ const NavBarItems = () => {
                             }
                         </div>
                     </NavDropdown>
-                        {logOut && <PopUpOk onClick = {handleOnClose} onHide={() => setModalShow(false)} show={modalShow} message = {message}/>}
+                    {logOut && <PopUpOk onClick = {handleOnClose} onHide={() => setModalShow(false)} show={modalShow} message = {message}/>}
+
+                    {loggedInUsers.login &&
+                        <NavDropdown title="Usuario" id="basic-nav-dropdown"className={`${styles.menuUser}`}>
+                            <div className={`${styles.menuItems}`}>
+                                    <Nav.Item>
+                                        <Container>
+                                            <Image 
+                                                src={iconUser} // Asegúrate de tener la URL de la imagen del usuario aquí
+                                                // className={styles.userImage}
+                                                className="p-2 col-6"
+                                                alt="User Icon"
+                                                roundedCircle                           
+                                                fluid
+                                            />
+                                            <Nav.Item className="display-4 col-6">
+                                                <h4>Cesar</h4>
+                                                <h5>Edad: 35</h5>
+                                                <h5>Admin del sitio</h5>
+                                                <h5>cesarausa@gmail.com</h5>                                            
+                                            </Nav.Item>
+                                        </Container>
+                                    </Nav.Item>
+                                <NavDropdown.Item href="#">Home</NavDropdown.Item>
+                                <NavDropdown.Item href="#">Perfil</NavDropdown.Item>
+                                <NavDropdown.Item href="#">Configuracion del Sitio</NavDropdown.Item>
+                                <NavDropdown.Item href="#">Ayuda</NavDropdown.Item>
+                                {loggedInUsers.login &&
+                                    <NavDropdown.Divider />
+                                }
+                                {loggedInUsers.login &&
+                                    <NavDropdown.Item onClick={() => {
+                                        setModalShow(true)
+                                        handleLogOut()
+                                        }
+                                    }>Cerrar sesion</NavDropdown.Item>
+                                }
+                            </div>
+                        </NavDropdown>
+
+                    }
+                        
                 </Nav>
                 </Navbar.Collapse>
             </Container>

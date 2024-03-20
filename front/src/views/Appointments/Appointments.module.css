@@ -1,8 +1,10 @@
 .container h1 {
 	text-align: center;
-	color: #6f6f6f;
+    color: #6f6f6f;
 }
-
+.appointment {
+    text-align: center;
+}
 .container th {
     background-color: #0263be;
     color: white;

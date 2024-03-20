@@ -31,7 +31,6 @@ const BannerWelcome = () => {
     }
 
     return (
-        // <Carousel activeIndex={index} onSelect={handleSelect} className= {styles.carouselItem}>
         <Carousel activeIndex={index} onSelect={handleSelect} className= {styles.carouselItem}>
           <Carousel.Item className= {`${styles.carouselItem}`}>
             <Image src={ImgBanner1} fluid />;
@@ -40,7 +39,7 @@ const BannerWelcome = () => {
               <p className="display-9">{texts.productosSpot}</p>
               <h3 className="display-6 my-4">{texts.productos}</h3>
               <p className="display-7">{texts.productosFooter}</p>
-              <Container fluid className="d-flex justify-content-end mt-4">
+              <Container fluid className="d-flex mt-5">
                 <Button className= {` ${styles.buttonInfo}`} onClick={goHome}>Registrarme</Button>
                 <Button className= {` ${styles.buttonInfo}`} onClick={goPersonas}>Mas info</Button>                
               </Container>
@@ -54,7 +53,7 @@ const BannerWelcome = () => {
               <p className="display-9">{texts.viajesSpot}</p>
               <h3 className="display-6 my-4">{texts.viajes}</h3>
               <p className="display-7">{texts.viajesFooter}</p>
-              <Container fluid className="d-flex justify-content-end mt-4">
+              <Container fluid className="d-flex mt-5">
                 <Button className= {` ${styles.buttonInfo}`} onClick={goHome}>Solicitar Producto</Button>
                 <Button className= {` ${styles.buttonInfo}`} onClick={goPersonas}>Mas info</Button>                
               </Container>
@@ -68,40 +67,13 @@ const BannerWelcome = () => {
               <p className="display-9">{texts.tarjetaGoldSpot}</p>
               <h3 className="display-6 my-4">{texts.tarjetaGold}</h3>
               <p className="display-7">{texts.tarjetaGoldFooter}</p>
-              <Container fluid className="d-flex justify-content-end mt-4">
+              <Container fluid className="d-flex mt-5">
                 <Button className= {` ${styles.buttonInfo}`} onClick={goHome}>Pedir mi tarjeta</Button>
-                <Button className= {` ${styles.buttonInfo}`} onClick={goPersonas}>Mas info</Button>                
+                <Button className= {` ${styles.buttonInfo}`} onClick={goPersonas}>Mas info</Button>
               </Container>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
       );
-    
-    return (
-        <div className={styles.sliderContainer}>
-            <div className={styles.slider}>
-                <div className={styles.slides}>
-                    <div id="slides-1" className={styles.slide}>
-                        <span className={styles.slideText}><img src={imgBanner1} alt="" />{texts.productos}</span>
-                    </div>
-                    <div id="slides-2" className={styles.slide}>
-                        <span className={styles.slideText}><img src={imgBanner2} alt="" /></span>
-                    </div>
-                    <div id="slides-3" className={styles.slide}>
-                        <span className={styles.slideText}><img src={imgBanner1} alt="" /></span>
-                    </div>
-                    <div id="slides-4" className={styles.slide}>
-                        <span className={styles.slideText}><img src={imgBanner2} alt="" /></span>
-                    </div>
-                </div>
-                <div className={styles.sliderNav}>
-                    <a className={styles.sliderNavLink} href="#slides-1"></a>
-                    <a className={styles.sliderNavLink} href="#slides-2"></a>
-                    <a className={styles.sliderNavLink} href="#slides-3"></a>
-                    <a className={styles.sliderNavLink} href="#slides-4"></a>
-                </div>
-            </div>
-        </div>
-    );
 };
 export default BannerWelcome

@@ -4,11 +4,8 @@ import styles from "./Register.module.css";
 import logoBank from "../../assets/logoBank.png";
 import axios from 'axios';
 import PopUpOk from "../../components/PopUpOk/PopUpOk";
-import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-
-    const navigate = useNavigate()
 
     const initialState = {
         name: '',
@@ -48,7 +45,7 @@ const Register = () => {
     // Handle
     const handleOnSubmit = async (event) => {
         event.preventDefault();
-        // solo datosd que iran a la DB
+        // solo datos que iran a la DB
         const newUser = {
             name: formData.name,
             email: formData.email,
@@ -73,12 +70,6 @@ const Register = () => {
         const isFormValid = Object.values(errors).every(error => error === '');
         setIsValid(isFormValid);
     }, [errors]);
-
-    const handleOnClose = (event) => {
-        event.preventDefault();
-        setRegisterOk(false);
-        navigate("/");
-    }
 
     const handleReset = (event) => {
         event.preventDefault()
@@ -130,7 +121,9 @@ const Register = () => {
             placeholder: "*****",
         }
 
-    ]    
+    ]
+      //* button modal
+      const [modalShow, setModalShow] = useState(false);
 
     return (
         <div className={styles.container}>
@@ -155,7 +148,6 @@ const Register = () => {
                                     type= {input.type}
                                     id={input.name}
                                     placeholder= {input.placeholder}
-                                    // bracket notation
                                     value={formData[input.name]}
                                     name={input.name}
                                     onChange={handleInputForm}
@@ -166,14 +158,18 @@ const Register = () => {
                         })}
 
                         <div className={styles.register__btn__submit}>
-                            <button className={styles.register__submit} disabled = {!isValid}>Enviar Solicitud</button>
+                            
+                            <button
+                            className={styles.register__submit}
+                            disabled = {!isValid}
+                            onClick={() => setModalShow(true)}
+                            >
+                            Enviar Solicitud
+                            </button>
                             
                             <button type="button" className={styles.register__submit} onClick={handleReset}>Limpiar campos</button>
                         </div>
-
-                        <div>
-                            {registerOk && <PopUpOk handleOnClose = {handleOnClose} message = {message}/>}
-                        </div>
+                            {registerOk && <PopUpOk onHide={() => setModalShow(false)} show={modalShow} message = {message}/>}
 
                     </form>
                 </div>

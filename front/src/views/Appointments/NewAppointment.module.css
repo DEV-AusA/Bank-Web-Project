@@ -7,16 +7,15 @@
 	background: linear-gradient(90deg, #1d3557, #2a63b5);
 	position: relative;
 	box-shadow: 0px 0px 24px #1d3557;
-	z-index: 1;
 }
 
-.screen__content {
+.screenContent {
 	z-index: 1;
 	position: relative;	
 	height: 100%;
 }
 
-/* Colores de fondo del login*/
+/* Colores de fondo*/
 .screen__background {		
 	position: absolute;
 	top: 0;
@@ -68,18 +67,18 @@
 	right: 172px;
 	border-radius: 60px;
 }
-/* form login*/
-.login {
+
+/* form Appointment*/
+.formAppointment {
 	max-width: 500px;
 	padding: 80px;
 }
-.loginBanner {
+.formAppointmentBanner {
     display: flex;
     justify-content: center;
 }
 
-.loginBanner h1 {
-	font-size: 3em;
+.formAppointmentBanner h1 {
 	margin-top: auto; /* Empuja el h2 hacia abajo */
 	margin-bottom: 0; /* Elimina cualquier margen inferior */
 	line-height: 1;
@@ -88,31 +87,35 @@
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.loginBanner img {
+.formAppointmentBanner img {
     width: 50%;
 }
 
-.loginBannerText {
+.formAppointmentBannerText {
 	margin-bottom: 20px;
 }
-.loginBannerText h3{
+.formAppointmentBannerText h3{
     margin: 0;
 	text-align: right;
 	font-size: 1.2em;
 	padding-right: 30px;
 }
 
-.login__field {
+.formAppointmentField {
 	position: relative;
 	text-align: center;
 }
+.formAppointmentError {
+	color:red;
+	text-align: left;
+}
 
-.login__field h2 {
+.formAppointmentField h2 {
 	font-weight: bold;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.login input {
+.formAppointment input {
 	border: none;
 	border-bottom: 2px solid #D1D1D4;
 	background: none;
@@ -123,14 +126,14 @@
 	transition: .2s;
 }
 
-.login input:active,
-.login input:focus,
-.login input:hover {
+.formAppointment input:active,
+.formAppointment input:focus,
+.formAppointment input:hover {
 	outline: none;
 	border-bottom-color: #0077b6;
 }
 
-.login__submit {
+.formAppointmentSubmit {
 	background: #fff;
 	font-size: 14px;
 	margin-top: 30px;
@@ -147,83 +150,15 @@
 	cursor: pointer;
 	transition: .2s;
 }
-.login__submit:disabled {
+.formAppointmentSubmit:disabled {
     background-color: #ccc;
     color: #666;
     cursor: not-allowed; /* desactiva el mouse al pasar x el boton */
 }
 
-.login__submit:active,
-.login__submit:focus,
-.login__submit:hover {
+.formAppointmentSubmit:active,
+.formAppointmentSubmit:focus,
+.formAppointmentSubmit:hover {
 	border-color: #0077b6;
 	outline: none;
-}
-
-/* Fondo */
-
-.screenBg {		
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 0;
-	-webkit-clip-path: inset(0 0 0 0);
-	clip-path: inset(0 0 0 0);	
-	background-color: #023677;
-}
-
-.screenBgShape {
-	transform: rotate(45deg);
-	position: absolute;
-}
-
-.screenBgShape1 {
-	height: 1794px;
-	width: 221px;
-	background: #FFF;
-	top: -247px;
-	right: 1128px;
-	border-radius: 0 72px 0 0;
-}
-
-.screenBgShape2 {
-	height: 220px;
-	width: 251px;
-	background: #0077b6;
-	top: -168px;
-	right: 768px;
-	border-radius: 32px;
-}
-
-.screenBgShape3 {
-	height: 1200px;
-	width: 190px;
-	background: linear-gradient(270deg, #023e8a, #022857);
-	top: -232px;
-	right: 529px;
-	border-radius: 32px;
-}
-
-.screenBgShape4 {
-	height: 979px;
-	width: 200px;
-	background: #0077b6;
-	top: 360px;
-	right: 362px;
-	border-radius: 60px;
-}
-
-.screenBgShape5 {
-	height: 706px;
-	width: 163px;
-	background: #FFF;
-	top: 2px;
-	right: 227px;
-	border-radius: 72px 72px 0 0;
-}
-
-.bannerLeftLogin {
-	z-index: 1;
 }

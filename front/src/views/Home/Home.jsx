@@ -10,10 +10,7 @@ const Home = () => {
       <BannerWelcome />
       <Container>
         <NewsAPP/>
-      </Container>
-      <Container>
-        <Footer />        
-      </Container>
+      </Container>    
     </Container>
   );
 };

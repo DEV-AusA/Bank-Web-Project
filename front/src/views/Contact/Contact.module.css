@@ -1,0 +1,16 @@
+.contactSubmit {
+	background: #fff;
+	font-size: 14px;
+	margin-top: 30px;
+	padding: 16px 20px;
+	border-radius: 26px;
+	border: 1px solid #D4D3E8;
+	text-transform: uppercase;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	color: #023e8a;
+	box-shadow: 0px 2px 2px #023e8a;
+	cursor: pointer;
+	transition: .2s;
+}
