@@ -1,9 +1,11 @@
 import { AppDataSource } from "../config/data-source";
+import { EmbeddingProduct } from "../entities/EmbeddingProduct";
 import AppointmentRepository from "../repositories/Appointment.Repository";
 import CredentialRepository from "../repositories/Credential.Repository";
 import UserRepository from "../repositories/User.Repository";
 import { preloadAppointments } from "./Appointments.Data";
 import { preloadCredentials } from "./Credentials.Data";
+import { preloadProducts } from "./Products.Data";
 import { preloadUsers } from "./Users.Data";
 
 export const preloadUsersData = async () => {
@@ -21,6 +23,12 @@ export const preloadUsersData = async () => {
         for await(const credential of preloadCredentials) {
             const newCredential = await CredentialRepository.create(credential);
             await transactionalEntityManager.save(newCredential);
+        }
+        //products
+        for await (const product of preloadProducts){
+            // esta variable instancia el AppDataSource y el metodo getRepository pasandole como parametro la entity User
+            const newProduct = await AppDataSource.getRepository(EmbeddingProduct).create(product);
+            await transactionalEntityManager.save(newProduct);
         }
 
         console.log("Precarga de Usuarios del Preload realizada con éxito");        

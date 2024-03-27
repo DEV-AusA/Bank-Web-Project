@@ -1,0 +1,44 @@
+.chatBox {
+  transition: 500ms;
+  z-index: 1055;
+}
+
+.toast {
+  max-width: 100%;
+}
+
+.chatWindow {
+  max-height: 300px; /* Establece una altura máxima para el contenedor */
+  overflow-y: auto; /* Permite el desplazamiento vertical cuando el contenido excede la altura máxima */
+}
+
+.chatWindowOpen {
+  transform: translateY(0);
+}
+
+.toggleButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.chatContent {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chatInput {
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.userMessage {
+  text-align: right;
+  font-weight: bold;
+}
+
+.serverMessage {
+  text-align: left;
+}

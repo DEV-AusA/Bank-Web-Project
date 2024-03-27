@@ -12,7 +12,7 @@ import NavLink from 'react-bootstrap/esm/NavLink';
 
 function NewsAPP() {
   return (
-    <Row xs={1} md={2} className="g-4 my-1">
+    <Row xs={1} md={2} className={`${styles.container} g-4 my-1`}>
         <Col>
           <Card>
             <Card.Img variant="top" src={Mobile} fluid="true"/>
