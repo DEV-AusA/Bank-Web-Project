@@ -8,7 +8,8 @@ export class EmbeddingUserLogout {
     @Column()
     detail: string
 
-    @Column({ type: 'vector'})
+    // @Column({ type: 'vector'})
+    @Column()
     embedding: string;
     
 }

@@ -10,13 +10,15 @@ export class UserQuestion {
     @Column()
     question: string
 
-    @Column({ type: 'vector'})
+    // @Column({ type: 'vector'})
+    @Column()
     questionEmbedding: string
 
     @Column()
     answer: string
 
-    @Column({ type: 'vector'})
+    // @Column({ type: 'vector'})
+    @Column()
     answerEmbedding: string;
     
 }

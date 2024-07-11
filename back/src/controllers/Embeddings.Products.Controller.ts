@@ -12,19 +12,6 @@ const PostEmbeddingsProducts = async (req: Request, res: Response) => {
     const { product, suggestionsUse } = req.body;
 
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY ?? '');
-
-    // // config del prompt del embedding
-    // const GenerateEmbedding: EmbedContentRequest = {
-    //     content: 
-    //     {
-    //         role: 'user', // <= ELEGIR ALGUNO "function" | "user" | "model"
-    //         parts: [
-    //             {
-    //             text: `${product}`
-    //             }
-    //       ]
-    //     }        
-    // }; 
     
     try {
 
@@ -34,18 +21,27 @@ const PostEmbeddingsProducts = async (req: Request, res: Response) => {
         const resultProductEmbedding = await modelEmbedding.embedContent(product);
         const productEmbedding = await resultProductEmbedding.embedding.values;
 
-        // product embedding
+        // suggestionUse embedding
         const resultSuggestionsUseEmbedding = await modelEmbedding.embedContent(suggestionsUse);
         const suggestionsUseEmbedding = await resultSuggestionsUseEmbedding.embedding.values;
 
-        // Guarda los embeddings en la DB
         const embeddingRepository = AppDataSource.getRepository(EmbeddingProduct);
         await embeddingRepository.save({
             product,
-            product_embedding: pgvector.toSql(productEmbedding),
+            product_embedding: productEmbedding,
             suggestions_use: suggestionsUse,
-            suggestions_use_embedding: pgvector.toSql(suggestionsUseEmbedding),
+            suggestions_use_embedding: suggestionsUseEmbedding,
         });
+        
+        // EMBEDDINGS OFF 
+        // // Guarda los embeddings en la DB
+        // const embeddingRepository = AppDataSource.getRepository(EmbeddingProduct);
+        // await embeddingRepository.save({
+        //     product,
+        //     product_embedding: pgvector.toSql(productEmbedding),
+        //     suggestions_use: suggestionsUse,
+        //     suggestions_use_embedding: pgvector.toSql(suggestionsUseEmbedding),
+        // });
         
         res.status(200).json({
             message: "Embeddings creados con exito"

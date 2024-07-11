@@ -6,12 +6,11 @@ import { UserQuestion } from "../entities/UserQuestion";
 import { AppDataSource } from "../config/data-source";
 import pgvector from "pgvector"
 import { EmbeddingProduct } from "../entities/EmbeddingProduct";
+import EmbeddingCosine from "../utils/EmbeddingCosine";
 
 
 const embeddingsUsersController = async (req: Request, res: Response) => {
     const { question } = req.body;
-
-    console.log(question);
 
     // const openai = new OpenAI({
     //     apiKey: process.env.OPENAI_API_KEY,
@@ -21,6 +20,42 @@ const embeddingsUsersController = async (req: Request, res: Response) => {
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY ?? '');
 
     // config del prompt de tipo generateContentStream 
+    const GenerateEmbedding: EmbedContentRequest = {
+        content: 
+        {
+            role: 'user', // <= ELEGIR ALGUNO "function" | "user" | "model"
+            parts: [
+                {
+                text: `${question}`
+                }
+          ]
+        }        
+    }; 
+    
+    try {
+        // gemini models
+
+        // model embedding-001
+        const modelEmbedding = genAI.getGenerativeModel({ model: "embedding-001"});
+        // question to embedding
+        const questionToEmbedding = await modelEmbedding.embedContent(question);
+        const questionEmbedding = await questionToEmbedding.embedding.values;
+        
+        // buscando matchs de embeddings en DB
+        const embeddingsMatch = await EmbeddingCosine.EmbeddingCosineDistance(questionEmbedding, "product_embedding", EmbeddingProduct );
+        let embeddingMatchToText = "";
+
+        // Recorremos el array de objetos
+        for await (let product of embeddingsMatch) {
+            // Accedemos a las propiedades 'product' y 'suggestions_use' de cada objeto y las agregamos al array 'valores'
+            embeddingMatchToText += product.product + " " + product.suggestions_use + " ";
+        };
+
+        // const requestToIA = `Eres un vendedor de productos experimentado, experto en interpretar y responder preguntas basadas en las fuentes proporcionadas. Utilizando el contexto proporcionado entre las etiquetas <context></context>, genera una respuesta concisa para una pregunta rodeada con las etiquetas <question></question>. Debes usar unicamente informacion del contexto. No repitas texto. Si no hay nada relevante en el contexto para la pregunta en cuestion, simplemente di "No tengo en estock ese producto". No intentes inventar  una respuesta. Cualquier cosa entre los siguientes bloques html context se recupera de un banco de conocimientos, no es parte de la conversacion con el usuario: <context>${embeddingMatchToText}</context> <question>${question}</question>`;
+
+        const requestToIA = `Eres un vendedor de productos experimentado, experto en interpretar y responder preguntas basadas en las fuentes que te voy a proporcionar. Utilizando el contexto que te voy a proporcionar entre las etiquetas <context></context>, genera una respuesta concisa para una pregunta rodeada con las etiquetas <question></question>. Debes usar unicamente informacion del contexto. No repitas texto. Si no hay nada relevante en el contexto simplemente di "No tengo en estock ese producto". <context>${embeddingMatchToText}</context> <question>${question}</question>`;
+
+            // config del prompt de tipo generateContentStream 
     const GenerateRequest: GenerateContentRequest = {
         generationConfig: {
             maxOutputTokens: 200, // Cantidad máxima de tokens que se pueden generar en la respuesta. Un token tiene casi cuatro caracteres. 100 tokens corresponden a casi 60 u 80 palabras. 
@@ -49,46 +84,60 @@ const embeddingsUsersController = async (req: Request, res: Response) => {
           }
         ]
     };
-
-       // config del prompt de tipo generateContentStream 
-    const GenerateEmbedding: EmbedContentRequest = {
-        content: 
-        {
-            role: 'user', // <= ELEGIR ALGUNO "function" | "user" | "model"
-            parts: [
-                {
-                text: `${question}`
-                }
-          ]
-        }        
-    }; 
-    
-    try {
-        // gemini models
-
-        // model embedding-001
-        const modelEmbedding = genAI.getGenerativeModel({ model: "embedding-001"});
-        // question to embedding
-        const questionToEmbedding = await modelEmbedding.embedContent(question);
-        const questionEmbedding = await questionToEmbedding.embedding.values;
-
-        console.log(questionEmbedding);
         
-        // compare with embedding DB
-        const similarities = await AppDataSource.getRepository(EmbeddingProduct)
-        .createQueryBuilder('embedding_products')
-        .orderBy('product_embedding <-> :product_embedding')
-        .setParameters({product_embedding: pgvector.toSql(questionEmbedding)})
-        .limit(3)
-        .getMany();
+        // model gemini-pro
+        const modelGeminiPro = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+        const chat = modelGeminiPro.startChat({
+            history: [
+              {
+                role: "user",
+                parts: [{ text: "Eres un vendedor de productos experimentado, experto en interpretar y responder preguntas basadas en las fuentes que te voy a proporcionar" }],
+              },
+              {
+                role: "model",
+                parts: [{ text: "¡Sí, exactamente! Soy un vendedor de productos experimentado y estoy listo para ayudarte. Con gusto interpretaré y responderé a tus preguntas de forma precisa y completa, basándome en la información que me proporciones." }],
+              },
+              {
+                role: "user",
+                parts: [{ text: 'Utilizando el contexto que te voy a proporcionar entre las etiquetas <context></context>, genera una respuesta concisa para una pregunta rodeada con las etiquetas <question></question>. Debes usar unicamente informacion del contexto. No repitas texto. Si no hay nada relevante en el contexto simplemente di "No tengo en estock ese producto"' }],
+              },
+              {
+                role: "model",
+                parts: [{ text: "¡Entendido! Con gusto interpretaré la pregunta y generaré una respuesta concisa utilizando únicamente la información proporcionada en el contexto. Para comenzar, por favor, introduce la pregunta entre las etiquetas <question> y el contexto entre las etiquetas <context>." }],
+              },
+              {
+                role: "user",
+                parts: [{ text: `el contexto es el siguiente <context>${embeddingMatchToText}</context>` }],
+              },
+              {
+                role: "model",
+                parts: [{ text: "¡Entendido! ya tengo el contexto , por favor, introduce la pregunta entre las etiquetas <question> para poder responderte" }],
+              },
+            ],
+            generationConfig: {
+              maxOutputTokens: 200,
+            },
+        });
+          
+        const msg = `<question>${question}</question>`;
+        const result = await chat.sendMessage(msg);
+          
+        // const result = await modelGeminiPro.generateContent(requestToIA);
+        // const result = await modelGeminiPro.generateContent("Cuantaos caracteres o cuantos tokes aceptas por cada consulta");
+        const response = await result.response;
+        const questionResult = await response.text();        
+
+        // EMBEDDINGS OFF
+        // // compare with embedding DB
+        // const similarities = await AppDataSource.getRepository(EmbeddingProduct)
+        // .createQueryBuilder('embedding_products')
+        // .orderBy('product_embedding <-> :product_embedding')
+        // .setParameters({product_embedding: pgvector.toSql(questionEmbedding)})
+        // .limit(3)
+        // .getMany();
 
         
-        // // model gemini-pro
-        // const modelGeminiPro = genAI.getGenerativeModel({ model: "gemini-pro" });
-        // const result = await modelGeminiPro.generateContentStream(GenerateRequest);
-        // // const result = await model.generateContent(GenerateRequest);
-        // const response = await result.response;
-        // const answer = await response.text();
 
 
         // console.log(question, questionEmbedding); 
@@ -124,9 +173,11 @@ const embeddingsUsersController = async (req: Request, res: Response) => {
         //     max_tokens: 100,
         //     temperature: 1
         // }); 
-        // console.log(answer);
+        console.log(embeddingMatchToText);        
+
+        console.log(questionResult);
         
-        res.status(200).json(similarities);
+        res.status(200).json(questionResult);
             
     } catch (error) {
         console.log(error);

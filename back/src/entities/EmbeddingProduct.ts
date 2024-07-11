@@ -28,13 +28,17 @@ export class EmbeddingProduct {
     @Column()
     product: string
 
-    @Column()
-    product_embedding: string;
+    // @Column({ type: 'vector' })
+    // product_embedding: string
+    @Column("numeric", { array: true })
+    product_embedding: number[]
 
     @Column()
     suggestions_use: string
 
-    @Column()
-    suggestions_use_embedding: string
+    // @Column({ type: 'vector' })
+    // product_embedding: string
+    @Column("numeric", { array: true })
+    suggestions_use_embedding: number[]
     
 }
